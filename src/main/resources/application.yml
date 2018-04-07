@@ -7,7 +7,21 @@ spring:
     username: springboot
     password: SpringBoot@123
     url: jdbc:mysql://192.168.1.116/springboot?characterEncoding=utf-8&useSSL=false
+    # 是否使用schema.sql建库和data.sql初始化数据，默认true
+    initialize: false
   jpa:
     show-sql: true
+    hibernate:
+      ddl-auto: none
   jackson:
     default-property-inclusion: non_null
+
+wechat:
+  mpAppId: wxf46908d1b94ffc6c
+  mpAppSecret: 26c765de9bbe93f5b131856bd107da25
+  #  mpAppId: wxd898fcb01713c658
+  #  mpAppSecret: 29d8a650db31472aa8700e3b0d739f2
+  mchId: 1409146202
+  mchKey: c976503d34ca432c601361f969fd8d85
+  keyPath: ./src/main/resources/logs/error.2018-02-09.log
+  notifyUrl: http://exp.mynatapp.cc/sell/pay/notify
