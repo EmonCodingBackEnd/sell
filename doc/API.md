@@ -1,6 +1,6 @@
 # API
 
-### 商品列表
+## 商品列表
 
 ```
 GET /sell/buyer/product/list
@@ -81,7 +81,7 @@ items: [{
 }
 ```
 
-### 订单列表
+## 订单列表
 
 ```
 GET /sell/buyer/order/list
@@ -131,7 +131,7 @@ size: 10
 }
 ```
 
-### 查询订单详情
+## 查询订单详情
 
 ```
 GET /sell/buyer/order/detail
@@ -177,7 +177,7 @@ orderId: 161899085773669363
 }
 ```
 
-### 取消订单
+## 取消订单
 
 ```
 POST /sell/buyer/order/cancel
@@ -200,7 +200,7 @@ orderId: 161899085773669363
 }
 ```
 
-### 获取openid
+## 获取openid
 
 ```
 重定向到 /sell/wechat/authorize
@@ -218,7 +218,7 @@ returnUrl: http://xxx.com/abc  //【必填】
 http://xxx.com/abc?openid=oZxSYw5ldcxv6H0EU67GgSXOUrVg
 ```
 
-### 支付订单
+## 支付订单
 
 ```
 重定向 /sell/pay/create
