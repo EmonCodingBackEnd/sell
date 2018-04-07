@@ -1,4 +1,4 @@
-package com.finalcoding.sell;
+package com.coding.sell;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
