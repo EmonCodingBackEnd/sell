@@ -34,7 +34,7 @@ public class TextMessage {
     private String FromUserName;
 
     /** 消息创建时间 （整型）. */
-    private String CreateTime;
+    private Long CreateTime;
 
     /** text. */
     private String MsgType;

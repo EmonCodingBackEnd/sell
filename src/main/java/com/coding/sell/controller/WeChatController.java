@@ -12,15 +12,19 @@
  ********************************************************************************/
 package com.coding.sell.controller;
 
+import com.coding.sell.DO.TextMessage;
+import com.coding.sell.utils.MessageUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.PrintWriter;
 import java.util.Arrays;
+import java.util.Date;
+import java.util.Map;
 
 /**
  * [请在此输入功能简述].
@@ -37,7 +41,7 @@ import java.util.Arrays;
 @Slf4j
 public class WeChatController {
 
-    @GetMapping("/checkSignature")
+    @GetMapping("/message")
     public String checkSignature(
             @RequestParam(value = "signature") String signature,
             @RequestParam("timestamp") String timestamp,
@@ -65,6 +69,43 @@ public class WeChatController {
             return echostr;
         } else {
             return "";
+        }
+    }
+
+    @PostMapping("/message")
+    public void receiveMessage(HttpServletRequest request, HttpServletResponse response) {
+        response.setCharacterEncoding("UTF-8");
+        PrintWriter printWriter = null;
+        try {
+            Map<String, String> map = MessageUtil.xmlToMap(request);
+            String toUserName = map.get("ToUserName");
+            String fromUserName = map.get("FromUserName");
+            String msgType = map.get("MsgType");
+            String content = map.get("Content");
+            String msgId = map.get("MsgId");
+
+            String message = null;
+            if (MessageUtil.MESSAGE_TEXT.equals(msgType)) {
+                TextMessage textMessage = new TextMessage();
+                textMessage.setFromUserName(toUserName);
+                textMessage.setToUserName(fromUserName);
+                textMessage.setMsgType(msgType);
+                textMessage.setCreateTime(new Date().getTime());
+                textMessage.setContent("您发送的消息是：" + content);
+                message = MessageUtil.textMessageToXml(textMessage);
+            } else if (MessageUtil.MESSAGE_EVENT.equals(msgType)) {
+                String eventType = map.get("Event");
+                if (MessageUtil.MESSAGE_SUBSCRIBE.equals(eventType)) {
+                    message =
+                            MessageUtil.initText(toUserName, fromUserName, MessageUtil.menuText());
+                }
+            }
+            printWriter = response.getWriter();
+            printWriter.write(message);
+        } catch (Exception e) {
+            log.error("【微信接收消息】异常", e);
+        } finally {
+            printWriter.close();
         }
     }
 }
