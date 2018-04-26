@@ -13,6 +13,7 @@
 package com.coding.sell.exception;
 
 import com.coding.sell.enums.ResultEnum;
+import lombok.Data;
 
 /**
  * [请在此输入功能简述].
@@ -24,6 +25,7 @@ import com.coding.sell.enums.ResultEnum;
  * @version 1.0.0
  * @since 1.0.0
  */
+@Data
 public class SellException extends RuntimeException {
 
     private Integer code;
