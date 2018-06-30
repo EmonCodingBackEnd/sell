@@ -4,10 +4,10 @@ create user 'springboot'@'%' identified by 'SpringBoot@123';
 grant all privileges on *.* to 'springboot'@'%' with grant option;
 
 -- 创建数据库
-CREATE DATABASE IF NOT EXISTS springboot DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+CREATE DATABASE IF NOT EXISTS selldb DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- 使用数据库
-use springboot;
+use selldb;
 
 select * from product_category;
 select * from product_info;
