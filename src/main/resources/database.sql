@@ -1,3 +1,7 @@
+-- --------------------------------------------------------------------------------
+-- 建库脚本
+-- --------------------------------------------------------------------------------
+
 -- 创建用户
 create user 'springboot'@'%' identified by 'SpringBoot@123';
 -- 授权用户
@@ -8,11 +12,3 @@ CREATE DATABASE IF NOT EXISTS selldb DEFAULT CHARACTER SET utf8mb4 COLLATE utf8m
 
 -- 使用数据库
 use selldb;
-
-select * from product_category;
-select * from product_info;
-
-select * from order_master;
-select * from order_detail;
-
-select * from seller_info;

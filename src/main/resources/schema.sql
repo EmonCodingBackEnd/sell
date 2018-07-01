@@ -1,4 +1,16 @@
--- 建库文件
+-- --------------------------------------------------------------------------------
+-- spring.datasource.initialize=true时，自动调用
+-- 建表脚本
+-- 要求：
+--    1、保证sql可以重复执行，也就是create之前先drop
+--    2、sql关键字推荐大写
+--    3、字段与表定义，必须带有注释
+--    4、索引定义规则：
+--      主键： primary key (`col1`, `col2`)
+--      唯一索引： unique key `uqe_col1_col2...` (`col1`, `col2`)
+--      索引： key `idx_col1_col2...` (`col1`, `col2`)
+-- --------------------------------------------------------------------------------
+
 drop table if exists product_info;
 create table `product_info` (
 	`product_id` varchar(32) not null,
