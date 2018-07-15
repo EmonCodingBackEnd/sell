@@ -1,5 +1,9 @@
 server:
+  port: 8080
   context-path: /sell
+  tomcat:
+    # 处理MultipartFile在Linux系统下找不到目录 /tmp/tomcat.<一串数字>.<port>/work/Tomcat/localhost/<项目名称>
+    basedir: /home/saas/sell/tmp
 
 spring:
   datasource:
@@ -15,6 +19,18 @@ spring:
       ddl-auto: none
   jackson:
     default-property-inclusion: non_null
+  http:
+    multipart:
+      max-file-size: 30Mb
+      max-request-size: 100Mb
+  # 禁用，否则对GenericKeyedFTPClientPool报错MXBean already registered with name org.apache.commons.pool2:type=GenericKeyedObjectPool,name=pool
+  jmx:
+    enabled: false
+  profiles:
+    active: dev
+
+logging:
+  config: classpath:logback-spring-${spring.profiles.active}.xml
 
 wechat:
   mpAppId: wxf46908d1b94ffc6c
