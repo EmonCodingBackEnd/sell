@@ -11,6 +11,17 @@
 --      索引： key `idx_col1_col2...` (`col1`, `col2`)
 -- --------------------------------------------------------------------------------
 
+drop table if exists product_category;
+create table `product_category` (
+	`category_id` int not null auto_increment,
+	`category_name` varchar(64) not null comment '类目名称',
+	`category_type` int not null comment '类目编号',
+	`create_time` timestamp not null default current_timestamp comment '创建时间',
+	`update_time` timestamp not null default current_timestamp on update current_timestamp comment '更新时间',
+	primary key (`category_id`),
+	unique key `uqe_category_type` (`category_type`)
+) comment '商品分类表';
+
 drop table if exists product_info;
 create table `product_info` (
 	`product_id` varchar(32) not null,
@@ -25,17 +36,6 @@ create table `product_info` (
 	`update_time` timestamp not null default current_timestamp on update current_timestamp comment '更新时间',
 	primary key (`product_id`)
 ) comment '商品表';
-
-drop table if exists product_category;
-create table `product_category` (
-	`category_id` int not null auto_increment,
-	`category_name` varchar(64) not null comment '类目名称',
-	`category_type` int not null comment '类目编号',
-	`create_time` timestamp not null default current_timestamp comment '创建时间',
-	`update_time` timestamp not null default current_timestamp on update current_timestamp comment '更新时间',
-	primary key (`category_id`),
-	unique key `uqe_category_type` (`category_type`)
-) comment '类目表';
 
 drop table if exists order_master;
 create table `order_master` (
