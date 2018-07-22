@@ -41,3 +41,6 @@ wechat:
   mchKey: c976503d34ca432c601361f969fd8d85
   keyPath: ./src/main/resources/logs/error.2018-02-09.log
   notifyUrl: http://exp.mynatapp.cc/sell/pay/notify
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
