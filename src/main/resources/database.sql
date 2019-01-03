@@ -9,6 +9,10 @@ create user 'springboot'@'%' identified by 'SpringBoot@123';
 -- 授权用户
 grant all privileges on *.* to 'springboot'@'%' with grant option;
 
+-- 如果是MySQL8会报错：Unable to load authentication plugin 'caching_sha2_password'.
+-- 更新密码
+alter user 'springboot'@'%' identified with mysql_native_password by 'SpringBoot@123';
+
 -- 创建数据库
 CREATE DATABASE IF NOT EXISTS selldb DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
