@@ -1,13 +1,46 @@
 server:
+  port: 8080
   context-path: /sell
+  tomcat:
+    # 处理MultipartFile在Linux系统下找不到目录 /tmp/tomcat.<一串数字>.<port>/work/Tomcat/localhost/<项目名称>
+    basedir: /home/saas/sell/tmp
 
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     username: springboot
     password: SpringBoot@123
-    url: jdbc:mysql://192.168.1.116/springboot?characterEncoding=utf-8&useSSL=false
+    url: jdbc:mysql://192.168.1.116/selldb?characterEncoding=utf-8&useSSL=false
+    # 是否使用schema.sql建库和data.sql初始化数据，默认true
+    initialize: false
   jpa:
     show-sql: true
+    hibernate:
+      ddl-auto: none
   jackson:
     default-property-inclusion: non_null
+  http:
+    multipart:
+      max-file-size: 30Mb
+      max-request-size: 100Mb
+  # 禁用，否则对GenericKeyedFTPClientPool报错MXBean already registered with name org.apache.commons.pool2:type=GenericKeyedObjectPool,name=pool
+  jmx:
+    enabled: false
+  profiles:
+    active: dev
+
+logging:
+  config: classpath:logback-spring-${spring.profiles.active}.xml
+
+wechat:
+  mpAppId: wxf46908d1b94ffc6c
+  mpAppSecret: 26c765de9bbe93f5b131856bd107da25
+  #  mpAppId: wxd898fcb01713c658
+  #  mpAppSecret: 29d8a650db31472aa8700e3b0d739f2
+  mchId: 1409146202
+  mchKey: c976503d34ca432c601361f969fd8d85
+  keyPath: ./src/main/resources/logs/error.2018-02-09.log
+  notifyUrl: http://exp.mynatapp.cc/sell/pay/notify
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
